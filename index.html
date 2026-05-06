@@ -761,6 +761,10 @@
 
       <div class="jeopardy" id="jeopardy-board"></div>
 
+      <div class="btn-row" style="justify-content: center; margin-top: 20px;">
+        <button class="btn secondary" onclick="resetJeopardy()">↻ Reset Board & Scores</button>
+      </div>
+
       <div class="station-nav">
         <button class="btn secondary" onclick="goTo('break')">← Break</button>
         <button class="btn gold" onclick="completeAndNext('jeopardy', 'reading')">Complete (+10 XP) →</button>
@@ -1040,6 +1044,16 @@
   function renderTeams() {
     document.getElementById('team-a').textContent = state.teamA;
     document.getElementById('team-b').textContent = state.teamB;
+  }
+
+  function resetJeopardy() {
+    if (!confirm('Reset the Jeopardy board and team scores?')) return;
+    state.jpUsed = [];
+    state.teamA = 0;
+    state.teamB = 0;
+    save();
+    renderJeopardy();
+    renderTeams();
   }
 
   const jeopardyData = {
